@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Fingerprint Example</title>
+</head>
+<body>
+    <h1>Fingerprint Arduino</h1>
+    <div id="message">   
+    </div>
+    <hr>
+    <div id="enrollment">
+        <label for="enroll-id">Id huella digital</label>
+        <input type="text" id="enroll-id">
+        <button type="submit" id="enviar">Enviar</button>
+    </div>
+    
+    <script src="/socket.io/socket.io.js"></script>
+    <script>
+        const socket = io();
+        var message = document.querySelector("#message");
+        var textId = document.querySelector('#enroll-id');
+        var enviar = document.querySelector('#enviar'); 
+
+        socket.on('arduino:enroll', function(data) {
+            console.log(data);
+            message.innerHTML += data.value;
+        });
+    //     socket.emit('arduino:data', {
+    //         value: parseInt(textId.value)
+    //     });
+
+    //    enviar.onclick = function(e){
+    //         e.preventDefault();
+    //         //console.log(textId.value);
+            
+            
+    //    };
+       //console.log(parseInt(textId.value));
+    </script>
+</body>
+</html>
